@@ -5,10 +5,12 @@ metadata:
   namespace: app01-volume
   annotations:
     argocd.argoproj.io/hook: PostSync
-    version: "1.55"
 spec:
   template:
     spec:
+      metadata:
+        annotations:
+          version: "1.55"
       serviceAccountName: version-job-sa
       containers:
       - name: version-job
