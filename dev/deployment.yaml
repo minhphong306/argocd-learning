@@ -3,6 +3,8 @@ kind: Deployment
 metadata:
   name: nginx-deployment
   namespace: app01-volume
+  annotations:
+    version: "1.55"
 spec:
   replicas: 1
   selector:
