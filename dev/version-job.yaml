@@ -2,6 +2,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: update-version-job
+  version: "1.55"
   annotations:
     argocd.argoproj.io/hook: PostSync
     version: "1.55"
@@ -20,7 +21,7 @@ spec:
         - name: VERSION
           valueFrom:
             fieldRef:
-              fieldPath: metadata.name
+              fieldPath: metadata.version
         volumeMounts:
         - name: version-volume
           mountPath: /mnt/version
