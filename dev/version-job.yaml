@@ -20,7 +20,7 @@ spec:
         - -c
         - |
           VERSION=$(kubectl -n app01-volume get pod --selector=job-name=update-version-job -o=jsonpath='{.items[0].metadata.annotations.version}')
-          echo "system $VERSION" > /mnt/version/version.txt  # Ghi vào file trong volume
+          echo "system $VERSION" > /mnt/versions/all-o24.version.txt  # Ghi vào file trong volume
           echo "New version is: $VERSION"
         env:
         - name: VERSION
@@ -30,6 +30,8 @@ spec:
         volumeMounts:
           - name: version-storage
             mountPath: /mnt/version
+      securityContext:
+          runAsUser: 0  # Chạy container dưới user root
       volumes:
         - name: version-storage
           persistentVolumeClaim:
