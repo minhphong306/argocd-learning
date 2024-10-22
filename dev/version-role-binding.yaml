@@ -9,5 +9,5 @@ subjects:
   namespace: app01-volume
 roleRef:
   kind: Role
-  name: version_job_role
+  name: version-job-role
   apiGroup: rbac.authorization.k8s.io
