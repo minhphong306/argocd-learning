@@ -1,0 +1,30 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: update-version-job
+  annotations:
+    argocd.argoproj.io/hook: PostSync
+    version: "1.55"
+spec:
+  template:
+    spec:
+      containers:
+      - name: version-job
+        image: busybox
+        command:
+        - /bin/sh
+        - -c
+        - |
+          echo "system: $VERSION" > /mnt/version/all-o24.version.txt
+        env:
+        - name: VERSION
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.labels.version
+        volumeMounts:
+        - name: version-storage
+          mountPath: /mnt/version
+        volumes:
+        - name: version-storage
+          persistentVolumeClaim:
+            claimName: version-pvc
