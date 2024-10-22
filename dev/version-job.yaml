@@ -20,11 +20,12 @@ spec:
         - name: VERSION
           valueFrom:
             fieldRef:
-              fieldPath: metadata.labels.version
+              fieldPath: metadata.annotations.version
         volumeMounts:
         - name: version-storage
           mountPath: /mnt/version
         volumes:
         - name: version-storage
           persistentVolumeClaim:
-            claimName: version-pvc
+            claimName: version-volume-claim
+      restartPolicy: OnFailure
