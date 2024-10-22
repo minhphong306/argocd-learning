@@ -34,7 +34,7 @@ spec:
           emptyDir: {}
         - name: version-storage
           persistentVolumeClaim:
-            claimName: persistent-volume-claim
+            claimName: version-volume-claim
 ---
 apiVersion: v1
 kind: ConfigMap
