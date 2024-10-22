@@ -7,10 +7,10 @@ metadata:
     argocd.argoproj.io/hook: PostSync
 spec:
   template:
-    spec:
-      metadata:
+    metadata:
         annotations:
           version: "1.55"
+    spec:
       serviceAccountName: version-job-sa
       containers:
       - name: version-job
