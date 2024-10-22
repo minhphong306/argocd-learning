@@ -10,7 +10,7 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   storageClassName: standard
   hostPath:
-    path: "/mnt/data/version"
+    path: "/mnt/version"
     type: DirectoryOrCreate
 ---
 apiVersion: v1

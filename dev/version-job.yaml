@@ -10,14 +10,17 @@ metadata:
 spec:
   template:
     spec:
+      serviceAccountName: version-job-sa
       containers:
       - name: version-job
-        image: busybox
+        image: bitnami/kubectl:latest
         command:
         - /bin/sh
         - -c
         - |
-          echo "system: $VERSION" > /mnt/version/all-o24.version.txt
+          VERSION=$(kubectl -n myapp get pod version-pod -o=jsonpath='{.metadata.annotations.version}')
+          echo "system $VERSION" > /mnt/version/version.txt  # Ghi vào file trong volume
+          echo "New version is: $VERSION"
         env:
         - name: VERSION
           valueFrom:
