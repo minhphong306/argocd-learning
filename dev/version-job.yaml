@@ -29,7 +29,7 @@ spec:
               fieldPath: metadata.name
         volumeMounts:
           - name: version-storage
-            mountPath: /mnt/version
+            mountPath: /mnt/versions
       securityContext:
           runAsUser: 0  # Chạy container dưới user root
       volumes:
