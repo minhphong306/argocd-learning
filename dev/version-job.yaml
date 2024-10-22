@@ -22,10 +22,10 @@ spec:
             fieldRef:
               fieldPath: metadata.annotations.version
         volumeMounts:
-        - name: version-storage
+        - name: version-volume
           mountPath: /mnt/version
         volumes:
-        - name: version-storage
+        - name: version-volume
           persistentVolumeClaim:
             claimName: version-volume-claim
       restartPolicy: OnFailure
