@@ -21,7 +21,7 @@ spec:
         - name: VERSION
           valueFrom:
             fieldRef:
-              fieldPath: metadata.version
+              fieldPath: metadata.name
         volumeMounts:
         - name: version-volume
           mountPath: /mnt/version
