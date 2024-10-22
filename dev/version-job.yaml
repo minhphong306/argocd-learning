@@ -3,7 +3,6 @@ kind: Job
 metadata:
   name: update-version-job
   namespace: app01-volume
-  version: "1.55"
   annotations:
     argocd.argoproj.io/hook: PostSync
     version: "1.55"
