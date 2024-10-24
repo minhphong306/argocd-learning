@@ -11,22 +11,18 @@ spec:
         annotations:
           version: "1.55"
     spec:
-      serviceAccountName: version-job-sa
       containers:
       - name: version-job
-        image: bitnami/kubectl:latest
+        image: busybox
+        env:
+          - name: VERSION
+            value: "1.55"
         command:
         - /bin/sh
         - -c
         - |
-          VERSION=$(kubectl -n app01-volume get pod --selector=job-name=update-version-job -o=jsonpath='{.items[0].metadata.annotations.version}')
-          echo "system $VERSION" > /mnt/versions/all-o24.version.txt  # Ghi vào file trong volume
+          echo "system: $VERSION" > /mnt/versions/all-o24.version.txt  # Ghi vào file trong volume
           echo "New version is: $VERSION"
-        env:
-        - name: VERSION
-          valueFrom:
-            fieldRef:
-              fieldPath: metadata.name
         volumeMounts:
           - name: version-storage
             mountPath: /mnt/versions
