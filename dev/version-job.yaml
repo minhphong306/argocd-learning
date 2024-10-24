@@ -5,18 +5,17 @@ metadata:
   namespace: app01-volume
   annotations:
     argocd.argoproj.io/hook: PostSync
+    argocd.argoproj.io/hook-delete-policy: HookSucceeded
 spec:
   template:
     metadata:
-        annotations:
-          version: "1.56"
     spec:
       containers:
       - name: version-job
         image: busybox
         env:
           - name: VERSION
-            value: "1.55"
+            value: "1.56"
         command:
         - /bin/sh
         - -c
