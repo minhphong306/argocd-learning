@@ -19,7 +19,7 @@ metadata:
   name: version-volume-claim
 spec:
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
   resources:
     requests:
       storage: 10Mi
