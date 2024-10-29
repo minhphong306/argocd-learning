@@ -9,6 +9,8 @@ metadata:
 spec:
   template:
     metadata:
+      labels:
+        app: version-update
     spec:
       containers:
       - name: version-job
@@ -20,15 +22,15 @@ spec:
         - /bin/sh
         - -c
         - |
-          echo "system: $VERSION" > /mnt/versions/all-o24.version.txt  # Ghi vào file trong volume
+          echo "system: $VERSION" > /mnt/versions/all-o24.version.txt
           echo "New version is: $VERSION"
         volumeMounts:
           - name: version-storage
             mountPath: /mnt/versions
       securityContext:
-          runAsUser: 0  # Chạy container dưới user root
+        runAsUser: 0  # Run container as root user
       volumes:
         - name: version-storage
           persistentVolumeClaim:
-            claimName: version-volume-claim
+            claimName: version-volume-claim  # Ensure this PVC exists
       restartPolicy: OnFailure
