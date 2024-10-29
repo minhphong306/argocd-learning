@@ -17,7 +17,7 @@ spec:
         image: busybox
         env:
           - name: VERSION
-            value: "1.61"
+            value: "1.62"
         command:
         - /bin/sh
         - -c
