@@ -12,8 +12,6 @@ spec:
     metadata:
       labels:
         app: nginx
-      annotations:
-       version: "1.55"
     spec:
       containers:
         - name: nginx
