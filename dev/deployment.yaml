@@ -26,15 +26,15 @@ spec:
               mountPath: /usr/share/nginx/html
             - name: version-storage
               mountPath: /var/www/html/versions
-    volumes:
-      - name: nginx-config
-        configMap:
-          name: nginx-config
-      - name: html-content
-        emptyDir: {}
-      - name: version-storage
-        persistentVolumeClaim:
-          claimName: version-volume-claim
+      volumes:
+        - name: nginx-config
+          configMap:
+            name: nginx-config
+        - name: html-content
+          emptyDir: {}
+        - name: version-storage
+          persistentVolumeClaim:
+            claimName: version-volume-claim
 ---
 apiVersion: v1
 kind: ConfigMap
