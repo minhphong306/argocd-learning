@@ -13,17 +13,29 @@ spec:
       annotations:
         checksum/config: ${CONFIGMAP_CHECKSUM}
     spec:
+      initContainers:
+      - name: init-version
+        image: busybox
+        command: 
+        - /bin/sh
+        - -c
+        - |
+          VERSION=$(grep version /config/10-version.yaml | cut -d: -f2 | tr -d ' ')
+          echo "system:$VERSION" > /versions/all-o24.version.txt
+        volumeMounts:
+        - name: version-config
+          mountPath: /config
+        - name: version-storage
+          mountPath: /versions
       containers:
       - name: nginx
         image: nginx
         volumeMounts:
-        - name: version-config
-          mountPath: /var/www/html/versions/all-o24.version.txt
-          subPath: all-o24.version.txt
+        - name: version-storage
+          mountPath: /var/www/html/versions
       volumes:
       - name: version-config
         configMap:
           name: outscan-gitops-version-config
-          items:
-          - key: 10-version.yaml
-            path: all-o24.version.txt
+      - name: version-storage
+        emptyDir: {}
