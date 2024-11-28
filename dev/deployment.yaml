@@ -11,7 +11,6 @@ spec:
       labels:
         app: nginx
       annotations:
-        # Annotation này sẽ trigger pod restart khi configmap thay đổi
         checksum/config: ${CONFIGMAP_CHECKSUM}
     spec:
       containers:
@@ -19,8 +18,8 @@ spec:
         image: nginx
         volumeMounts:
         - name: version-config
-          mountPath: /etc/config/all-o24.version.txt
-          subPath: 10-version.yaml
+          mountPath: /var/www/html/versions/all-o24.version.txt
+          subPath: all-o24.version.txt
       volumes:
       - name: version-config
         configMap:
