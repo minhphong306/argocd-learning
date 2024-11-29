@@ -10,8 +10,6 @@ spec:
     metadata:
       labels:
         app: nginx
-      annotations:
-        checksum/config: "$(cat 10-version.yaml | sha256sum)"
     spec:
       initContainers:
       - name: init-version
