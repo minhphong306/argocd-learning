@@ -11,29 +11,13 @@ spec:
       labels:
         app: nginx
     spec:
-      initContainers:
-      - name: init-version
-        image: busybox
-        command: 
-        - /bin/sh
-        - -c
-        - |
-          VERSION=$(grep version /config/10-version.yaml | cut -d: -f2 | tr -d ' ')
-          echo "system:$VERSION" > /versions/all-o24.version.txt
-        volumeMounts:
-        - name: version-config
-          mountPath: /config
-        - name: version-storage
-          mountPath: /versions
       containers:
       - name: nginx
         image: nginx
         volumeMounts:
-        - name: version-storage
+        - name: version-config
           mountPath: /var/www/html/versions
       volumes:
       - name: version-config
         configMap:
           name: outscan-gitops-version-config
-      - name: version-storage
-        emptyDir: {}

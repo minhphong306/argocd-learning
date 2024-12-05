@@ -10,4 +10,4 @@ resources:
 configMapGenerator:
   - name: outscan-gitops-version-config
     files:
-      - 10-version.yaml
+      - all-o24.version.txt
