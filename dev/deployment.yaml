@@ -16,7 +16,8 @@ spec:
         image: nginx
         volumeMounts:
         - name: version-config
-          mountPath: /var/www/html/versions
+          mountPath: /var/www/html/versions/all-o24.version.txt
+          subPath: 10-version.yaml
       volumes:
       - name: version-config
         configMap:
